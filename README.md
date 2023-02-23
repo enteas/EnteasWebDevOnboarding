@@ -20,6 +20,7 @@ Onboarding for Web Development for Enteas GmbH https://www.enteas.de/
     - [Couchbase](#couchbase)
     - [AG Grid](#ag-grid)
     - [Swagger/OpenAPI Spec 3.0](#swagger)
+- [Feedback](#feedback)
 
 
 ## Introduction
@@ -44,7 +45,7 @@ Install Visual Studio Code https://code.visualstudio.com/download
     - Install "Redux Devtools" as a Chrome Extension
 4. Install Git
     - Windows: https://git-scm.com/download/win
-    - Default installation, no need to change anything, can use a different Editor (for example Notepad++)
+    - Default installation, no need to change anything, can use a different Editor (for example, Notepad++)
     - Create a GitHub Account
 5. Optional for further development
     - Couchbase
@@ -59,15 +60,15 @@ Fork this Git repository to create your own copy of the repository. This will al
 
 Clone your forked repository to your local machine. This will create a local copy of the repository on your machine. If you need more information on how to clone a repository, please refer to the [Git](#git) section.
 
-While working at Enteas, most of your changes will be merged using Pull-Requests from your working branch. This will allow us to review your changes before merging them into the main branch. To understand the process of a Pull-Request, we suggest that you create a new branch before commiting and pushing your first changes. This will allow you to create a Pull-Request from your new branch to the main branch. You can then merge the Pull Request yourself via GitHub.
+While working at Enteas, most of your changes will be merged using Pull-Requests from your working branch. This will allow us to review your changes before merging them into the main branch. To understand the Pull-Request process, we suggest you create a new branch before committing and pushing your first changes. This will allow you to create a Pull-Request from your new branch to the main branch. You can then merge the Pull Request yourself via GitHub.
 
 ### Basic Backend Setup
-Open the cloned git project in a command promt or terminal. Run the following commands to initiate the backend project:
+Open the cloned git project in a command prompt or terminal. Run the following commands to initiate the backend project:
 
 1. `npm install -g express-generator`
 2. `express --no-view --git nameOfYourProject-be`
 
-You can name the project however you like, but we suggest that you use the following naming convention: `nameOfYourProject-be` for the backend and `nameOfYourProject-fe` for the frontend.
+You can name the project however you like, but we suggest using the following naming convention: `nameOfYourProject-be` for the backend and `nameOfYourProject-fe` for the frontend.
 
 Open the newly created folder in VSCode. Open the terminal inside of VSCode and run the following commands:
 1. `npm install`
@@ -75,12 +76,12 @@ Open the newly created folder in VSCode. Open the terminal inside of VSCode and 
 
 By default, your Express server will be running on port 3000, reachable by opening http://localhost:3000 in your browser. 
 
-As your frontend will also be running on port 3000 by default, you need to change one of the ports. Inside of your BE project open the bin/www file and change the line containing `var port = normalizePort(process.env.PORT || '3000')` to `var port = normalizePort(process.env.PORT || '3001')`. This will change the port to 3001.
+As your frontend will also be running on port 3000 by default, you need to change one of the ports. Inside of your BE project, open the bin/www file and change the line containing `var port = normalizePort(process.env.PORT || '3000')` to `var port = normalizePort(process.env.PORT || '3001')`. This will change the port to 3001.
 
 #### Basic BE Development
-Create a "src" folder in the top-level of your backend project. Inside of this folder, your newly written source-code should be saved. The next section will describe a minimal setup of how to create a new API endpoint.
+Create a "src" folder in the top level of your backend project. Inside this folder, your newly written source-code should be saved. The following section will describe a minimal setup for creating a new API endpoint.
 
-Inside the src folder create a new file called "helloEnteas.js".
+Inside the src folder, create a new file called "helloEnteas.js".
 The file should contain the following code:
 ``` javascript
 const helloEnteas = (app) => {
@@ -93,7 +94,7 @@ const helloEnteas = (app) => {
 module.exports.helloEnteas = helloEnteas;
 ```
 
-Inside of your app.js file, import the newly created file and call the function with the app as a parameter. Your app.js file should now look like this:
+Inside your app.js file, import the newly created file and call the function with the app as a parameter. Your app.js file should now look like this:
 ``` javascript
 			var express = require('express');
 			var path = require('path');
@@ -114,24 +115,24 @@ Inside of your app.js file, import the newly created file and call the function 
 			module.exports = app;
 ```
 
-This is only an explanation on how to expose an API endpoint. You can write all your future APIs the same way. What sort of React
-This guide will only provide some examples of what sort of endpoints you could write. Which endpoints you write and how complicated they are, are up to you. For some examples of what you could do, see [Project Ideas](#project-ideas)
+This is only an explanation of how to expose an API endpoint. You can write all your future APIs the same way. What sort of React
+This guide will only provide examples of what sort of endpoints you could write. Which endpoints you write and how complicated they are, are up to you. For some examples of what you could do, see [Project Ideas](#project-ideas)
 
 
 ### Basic Frontend Setup
-Open the cloned git project in a command promt or terminal. Run the following commands to initiate the backend project:
+Open the cloned git project in a command prompt or terminal. Run the following commands to initiate the backend project:
 `npx create-react-app nameOfYourProject-fe --template redux`
 
-Open the newly created project using VSCode. Open the terminal inside of VSCode and run: `npm run start`. You do not need to run `npm install` as this is already done by the create-react-app command. Your can view your running React FE project by opening http://localhost:3000 in your browser.
+Open the newly created project using VSCode. Open the terminal inside of VSCode and run: `npm run start`. You do not need to run `npm install` as the create-react-app command already does this. You can view your running React FE project by opening http://localhost:3000 in your browser.
 
-The project is initiated with a basic Redux counter example. In order to understand redux and how to use it, we suggest that you read the [Redux](#redux) section. Especially "Redux Toolkit" is an essential part of our development.
+The project is initiated with a basic Redux counter example. To understand redux and how to use it, we suggest that you read the [Redux](#redux) section. Especially "Redux Toolkit" is an essential part of our development.
 
 ## Project Ideas
-As the purpose of this guide is to improve your understanding of Web development using the technology stack we use at Enteas, there is no strict specification of what you have to implement. If you have an exciting idea you want to create in a web app, you should do so.
+As this guide aims to improve your understanding of Web development using the technology stack we use at Enteas, there is no strict specification of what you have to implement. If you have an exciting idea you want to create in a web app, you should do so.
 
 In case you are not sure what you want to do, here is an example:
- - Create a web page which allows you to enter information about yourself. This information should be saved in a couchbase database. You should be able to create, read, update and delete (CRUD) the data. This would mean you would require a form in the frontend where you can enter necessary information about a person. You would need API endpoints to which you can transfer the information entered in the frontend. Each endpoint then saves/edits/deletes the data in a couchbase database. For more information about working with couchbase, see: [Couchbase](#couchbase). We use couchbase in many of our projects, so learning about couchbase early will help you a lot. 
- Every person you created could be displayed in a table. For creating a table, be sure to use [AG-Grid](#ag-grid), as we frequently utilize this library.
+ - Create a web page that allows you to enter information about yourself. This information should be saved in a couchbase database. You should be able to create, read, update and delete (CRUD) the data. This would mean you would require a form in the frontend where you can enter the necessary information about a person. You would need API endpoints to which you can transfer the information entered in the frontend. Each endpoint then saves/edits/deletes the data in a couchbase database. For more information about working with couchbase, see [Couchbase](#couchbase). We use couchbase in many of our projects, so learning about couchbase early will help you a lot. 
+ Every person you created could be displayed in a table. To create a table, be sure to use [AG-Grid](#ag-grid), as we frequently utilize this library.
 
 ## Reading Material
 
@@ -170,3 +171,6 @@ In case you are not sure what you want to do, here is an example:
 ### Swagger
 - https://swagger.io/specification/
 
+
+## Feedback
+As this onboarding guide's purpose is to aid new interns in becoming accustomed to the web development stack we often use at Enteas, it would be very beneficial if you could provide feedback regarding this guide. Which points were wrong, and where more explanation/information is necessary. You know how to contact us; just send us an E-Mail with open questions and improvements. We will try to incorporate these improvements and open questions into this guide. 
