@@ -141,6 +141,7 @@ In case you are not sure what you want to do, here is an example:
 ### Redux
 - https://redux.js.org/tutorials/essentials/part-1-overview-concepts
 - https://redux-toolkit.js.org/tutorials/overview
+- https://redux-toolkit.js.org/rtk-query/overview
 
 ### Node Express
 - https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
