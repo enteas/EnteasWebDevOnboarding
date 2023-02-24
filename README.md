@@ -117,12 +117,12 @@ Inside your app.js file, import the newly created file and call the function wit
 			module.exports = app;
 ```
 
-This is only an explanation of how to expose an API endpoint. You can write all your future APIs the same way. What sort of React
+This is only an explanation of how to expose an API endpoint. You can write all your future APIs the same way.
 This guide will only provide examples of what sort of endpoints you could write. Which endpoints you write and how complicated they are, are up to you. For some examples of what you could do, see [Project Ideas](#project-ideas)
 
 
 ### Basic Frontend Setup
-Open the cloned git project in a command prompt or terminal. Run the following commands to initiate the backend project:
+Open the cloned git project in a command prompt or terminal. Run the following commands to initiate the frontend project:
 `npx create-react-app nameOfYourProject-fe --template redux`
 
 Open the newly created project using VSCode. Open the terminal inside of VSCode and run: `npm run start`. You do not need to run `npm install` as the create-react-app command already does this. You can view your running React FE project by opening http://localhost:3000 in your browser.
