@@ -151,7 +151,7 @@ export function getHelloEnteas() {
 }
 ```
 
-Now we have to call this function from the frontend. To achieve this, we will modify the action of the "incrementAsync" function provided by the create-react-app counter example. Open features/counter/counterSlice.js. We have to perform small changes at different parts in the file. Locate the `const initialState` object and `helloEnteasMessage: ''` to the end of the object. It should now look like this:
+Now we have to call this function from the frontend. To achieve this, we will modify the action of the "incrementAsync" function provided by the create-react-app counter example. Open features/counter/counterSlice.js. We have to perform small changes at different parts in the file. Locate the `const initialState` object and add `helloEnteasMessage: ''` to the end of the object. It should now look like this:
 ``` javascript
 const initialState = {
   value: 0,
@@ -160,7 +160,7 @@ const initialState = {
 };
 ```
 
-Next, we replace the function called inside incrementAsync to call our getHelloEnteas function. To achieve this, we need to import the getHelloEnteas function from the counterAPI, modify `import { fetchCount } from './counterAPI';` to `import { getHelloEnteas } from './counterAPI';`
+Next, we replace the function called inside incrementAsync to call our getHelloEnteas function. To achieve this, we need to import the getHelloEnteas function from the counterAPI and modify `import { fetchCount } from './counterAPI';` to `import { getHelloEnteas } from './counterAPI';`
 
 Your incrementAsync function should now look like this:
 ``` javascript
@@ -173,7 +173,7 @@ export const incrementAsync = createAsyncThunk(
   }
 );
 ```
-Note how the return was modified from `response.data` to `response.message` since our helloEnteas API in the BE returns an object containing a success boolean and a message string. Here, we are only interested in the message string.
+Note how the return was modified from `response.data` to `response.message` since our helloEnteas API in the BE returns an object containing a success boolean and a message string. For this example, we are only interested in the message string.
 
 Finally, we need to modify the reducer (`extraReducers` in counterSlice.js) to save the message string in the state. Modify the extraReducers function to look like this:
 ``` javascript
