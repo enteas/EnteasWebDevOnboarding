@@ -151,7 +151,7 @@ export function getHelloEnteas() {
 }
 ```
 
-Now we have to call this function from the frontend. To achieve this, we will modify the action of the "incrementAsync" function provided by the create-react-app counter example. Open features/counter/counterSlice.js. We have to perform small changes at different parts in the file. Locate the `const initialState` object and `helloEnteasMessage: ''` to the end of the object. It should not look like this:
+Now we have to call this function from the frontend. To achieve this, we will modify the action of the "incrementAsync" function provided by the create-react-app counter example. Open features/counter/counterSlice.js. We have to perform small changes at different parts in the file. Locate the `const initialState` object and `helloEnteasMessage: ''` to the end of the object. It should now look like this:
 ``` javascript
 const initialState = {
   value: 0,
