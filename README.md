@@ -72,7 +72,8 @@ You can name the project however you like, but we suggest using the following na
 
 Open the newly created folder in VSCode. Open the terminal inside of VSCode and run the following commands:
 1. `npm install`
-2. `npm run start`
+2. `npm install cors`
+3. `npm run start`
 
 By default, your Express server will be running on port 3000, reachable by opening http://localhost:3000 in your browser. 
 
@@ -109,6 +110,7 @@ Inside your app.js file, import the newly created file and call the function wit
 			app.use(express.urlencoded({ extended: false }));
 			app.use(cookieParser());
 			app.use(express.static(path.join(__dirname, 'public')));
+      app.use(cors());
 			app.use('/', indexRouter);
 			app.use('/users', usersRouter);
 			helloEnteas(app);
@@ -126,6 +128,72 @@ Open the cloned git project in a command prompt or terminal. Run the following c
 Open the newly created project using VSCode. Open the terminal inside of VSCode and run: `npm run start`. You do not need to run `npm install` as the create-react-app command already does this. You can view your running React FE project by opening http://localhost:3000 in your browser.
 
 The project is initiated with a basic Redux counter example. To understand redux and how to use it, we suggest that you read the [Redux](#redux) section. Especially "Redux Toolkit" is an essential part of our development.
+
+In order to access our "HelloEnteas" GET Request, we will modify and extend the code from the counter example. Two steps are necessary, we need to fetch the data from our backend, and we need a place to trigger the function from the frontend. 
+To fetch the data, navigate to features/counter/counterAPI.js and add following function to the end of the file: 
+``` javascript
+export function getHelloEnteas() {
+  return new Promise((resolve) => {
+    //fetch data from express backend
+    const url = 'http://localhost:3001/getHelloEnteas';
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('data', data);
+        resolve(data);
+      });
+  });
+}
+```
+
+Now we have to call this function from the frontend. To achieve this, we will modify the action of the "incrementAsync" function provided by the create-react-app counter example. Open features/counter/counterSlice.js. We have to perform small changes at different parts in the file. Locate the `const initialState` object and `helloEnteasMessage: ''` to the end of the object. It should not look like this:
+``` javascript
+const initialState = {
+  value: 0,
+  status: 'idle',
+  helloEnteasMessage: ''
+};
+```
+
+Next, we replace the function called inside incrementAsync to call our getHelloEnteas function. To achieve this, we need to import the getHelloEnteas function from the counterAPI, modify `import { fetchCount } from './counterAPI';` to `import { getHelloEnteas } from './counterAPI';`
+
+Your incrementAsync function should now look like this:
+``` javascript
+export const incrementAsync = createAsyncThunk(
+  'counter/fetchCount',
+  async (amount) => {
+    const response = await getHelloEnteas();
+    // The value we return becomes the `fulfilled` action payload
+    return response.message;
+  }
+);
+```
+Note how the return was modified from `response.data` to `response.message` since our helloEnteas API in the BE returns an object containing a success boolean and a message string. Here, we are only interested in the message string.
+
+Finally, we need to modify the reducer (`extraReducers` in counterSlice.js) to save the message string in the state. Modify the extraReducers function to look like this:
+``` javascript
+extraReducers: (builder) => {
+    builder
+      .addCase(incrementAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.helloEnteasMessage = action.payload;
+      });
+  },
+```
+Instead of modifying the state.value variable, we save our payload, returned from our createAsyncThunk in the helloEnteasMessage state variable. 
+
+Once you have completed all of this your message from the backend will be stored in the redux store. You can view your current redux store by opening the Chrome Devtools and switching to the "Redux" tab (you need to have installed the Redux DevTools). Here, the current state is shown. 
+![img-redux](assets/readme-images/reduxState.png "Redux State")
+
+If you would like to display your message in the frontend, look at how the count is displayed in features/counter/Counter.js using the `useSelector(selectCount)` logic. You can use the same logic to display your message by writing a new selector in the counterSlice.
 
 ## Project Ideas
 As this guide aims to improve your understanding of Web development using the technology stack we use at Enteas, there is no strict specification of what you have to implement. If you have an exciting idea you want to create in a web app, you should do so.
