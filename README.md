@@ -110,7 +110,7 @@ Inside your app.js file, import the newly created file and call the function wit
 			app.use(express.urlencoded({ extended: false }));
 			app.use(cookieParser());
 			app.use(express.static(path.join(__dirname, 'public')));
-      app.use(cors());
+      			app.use(cors());
 			app.use('/', indexRouter);
 			app.use('/users', usersRouter);
 			helloEnteas(app);
