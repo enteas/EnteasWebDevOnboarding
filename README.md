@@ -55,7 +55,7 @@ Install Visual Studio Code https://code.visualstudio.com/download
 
 ## Development Guide
 ### Initial Setup
-Fork this Git repository to create your own copy of the repository. This will allow you to make changes to the repository without affecting the original repository.
+Fork this Git repository to create your own copy of the repository (How to fork using GitHub: https://docs.github.com/en/get-started/quickstart/fork-a-repo). This will allow you to make changes to the repository without affecting the original repository.
 ![img-fork](assets/readme-images/github_fork.png "Fork a repo")
 
 Clone your forked repository to your local machine. This will create a local copy of the repository on your machine. If you need more information on how to clone a repository, please refer to the [Git](#git) section.
