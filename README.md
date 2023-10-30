@@ -58,7 +58,7 @@ Install Visual Studio Code https://code.visualstudio.com/download
 Fork this Git repository to create your own copy of the repository (How to fork using GitHub: https://docs.github.com/en/get-started/quickstart/fork-a-repo). This will allow you to make changes to the repository without affecting the original repository.
 ![img-fork](assets/readme-images/github_fork.png "Fork a repo")
 
-Clone your forked repository to your local machine. This will create a local copy of the repository on your machine. If you need more information on how to clone a repository, please refer to the [Git](#git) section.
+Clone your forked repository to your local machine at an appropiate place (e.g C:\Users\yourUserName\Projects). This will create a local copy of the repository on your machine. If you need more information on how to clone a repository, please refer to the [Git](#git) section.
 
 While working at Enteas, most of your changes will be merged using Pull-Requests from your working branch. This will allow us to review your changes before merging them into the main branch. To understand the Pull-Request process, we suggest you create a new branch before committing and pushing your first changes. This will allow you to create a Pull-Request from your new branch to the main branch. You can then merge the Pull Request yourself via GitHub.
 
@@ -68,7 +68,7 @@ Open the cloned git project in a command prompt or terminal. Run the following c
 1. `npm install -g express-generator`
 2. `express --no-view --git nameOfYourProject-be`
 
-You can name the project however you like, but we suggest using the following naming convention: `nameOfYourProject-be` for the backend and `nameOfYourProject-fe` for the frontend.
+You can name the project however you like, but we suggest using the following naming convention: `name-of-your-project-be` for the backend and `name-of-your-project-fe` for the frontend.
 
 Open the newly created folder in VSCode. Open the terminal inside of VSCode and run the following commands:
 1. `npm install`
@@ -101,6 +101,7 @@ Inside your app.js file, import the newly created file and call the function wit
 			var path = require('path');
 			var cookieParser = require('cookie-parser');
 			var logger = require('morgan');
+			var cors = require('cors'); // -----> add this line
 			var indexRouter = require('./routes/index');
 			var usersRouter = require('./routes/users');
 			var app = express();
@@ -110,7 +111,7 @@ Inside your app.js file, import the newly created file and call the function wit
 			app.use(express.urlencoded({ extended: false }));
 			app.use(cookieParser());
 			app.use(express.static(path.join(__dirname, 'public')));
-      			app.use(cors());
+      			app.use(cors()); // -----> add this line
 			app.use('/', indexRouter);
 			app.use('/users', usersRouter);
 			helloEnteas(app);
@@ -123,7 +124,7 @@ This guide will only provide examples of what sort of endpoints you could write.
 
 ### Basic Frontend Setup
 Open the cloned git project in a command prompt or terminal. Run the following commands to initiate the frontend project:
-`npx create-react-app nameOfYourProject-fe --template redux`
+`npx create-react-app name-of-your-project-fe --template redux`
 
 Open the newly created project using VSCode. Open the terminal inside of VSCode and run: `npm run start`. You do not need to run `npm install` as the create-react-app command already does this. You can view your running React FE project by opening http://localhost:3000 in your browser.
 
@@ -194,6 +195,32 @@ Once you have completed all of this your message from the backend will be stored
 ![img-redux](assets/readme-images/reduxState.png "Redux State")
 
 If you would like to display your message in the frontend, look at how the count is displayed in features/counter/Counter.js using the `useSelector(selectCount)` logic. You can use the same logic to display your message by writing a new selector in the counterSlice.
+<details>
+  <summary>Solution</summary>
+
+  The counterSlice.js file should have an additional line:
+``` javascript
+export const selectEnteasMessage = (state) => state.counter.helloEnteasMessage;
+```
+Your Counter.js file should have additional code:
+``` javascript
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+  incrementAsync,
+  incrementIfOdd,
+  selectCount,
+  selectEnteasMessage
+} from './counterSlice';
+...
+const message = useSelector(selectEnteasMessage);
+...
+	</div>
+      {message}
+    </div>
+```
+</details>
 
 ## Project Ideas
 As this guide aims to improve your understanding of Web development using the technology stack we use at Enteas, there is no strict specification of what you have to implement. If you have an exciting idea you want to create in a web app, you should do so.
