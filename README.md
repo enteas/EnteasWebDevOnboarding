@@ -77,7 +77,7 @@ Open the newly created folder in VSCode. Open the terminal inside of VSCode and 
 
 By default, your Express server will be running on port 3000, reachable by opening http://localhost:3000 in your browser. 
 
-As your frontend will also be running on port 3000 by default, you need to change one of the ports. Inside of your BE project, open the bin/www file and change the line containing `var port = normalizePort(process.env.PORT || '3000')` to `var port = normalizePort(process.env.PORT || '3001')`. This will change the port to 3001.
+As your frontend will also be running on port 3000 by default, you need to change one of the ports. Inside of your BE project, open the bin/www file and change the line containing `var port = normalizePort(process.env.PORT || '3000')` to `var port = normalizePort(process.env.PORT || '3001')`. This will change the port to 3001. Note that after making changes to your BE code, it is necessary to restart your backend for the changes to take effect.
 
 #### Basic BE Development
 Create a "src" folder in the top level of your backend project. Inside this folder, your newly written source-code should be saved. The following section will describe a minimal setup for creating a new API endpoint.
